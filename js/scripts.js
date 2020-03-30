@@ -30,7 +30,9 @@ function Validate() {
     return false;
   }
   // validate email
-  if (email.value == "") {
+    var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  //if (email.value == "") {
+    if (!(regex.test(email.value))) {
     email.style.border = "1px solid red";
     document.getElementById('email_div').style.color = "red";
     email_error.textContent = "Email is required";
