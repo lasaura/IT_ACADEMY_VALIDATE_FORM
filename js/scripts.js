@@ -1,13 +1,16 @@
+
 //mejor un preventDefault en lugar de return cuando haya back para devolver
+//al ppio código no clase error, y marcar errores con cĺases ** revisar..**
 
 // validation function
 function Validate() {
-
+  var count_error =0;
   // SELECTING ALL TEXT ELEMENTS
   var username = document.forms["vform"]["username"];
   var email = document.forms['vform']['email'];
   var password = document.forms['vform']['password'];
   var password_confirm = document.forms['vform']['password_confirm'];
+
 // SELECTING ALL ERROR DISPLAY ELEMENTS
   var name_error = document.getElementById('name_error');
   var email_error = document.getElementById('email_error');
@@ -19,7 +22,9 @@ function Validate() {
     document.getElementById('username_div').style.color = "red";
     name_error.textContent = "Username is required";
     username.focus();
-    return false;
+    count_error++;
+  } else{
+
   }
   // validate username
   if (username.value.length < 3) {
@@ -27,7 +32,11 @@ function Validate() {
     document.getElementById('username_div').style.color = "red";
     name_error.textContent = "Username must be at least 3 characters";
     username.focus();
-    return false;
+    count_error++;
+  }else {
+    username.style.border = "1px solid black";
+    document.getElementById('username_div').style.color = "black";
+    name_error.textContent = "";
   }
   // validate email
   var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
@@ -37,7 +46,11 @@ function Validate() {
     document.getElementById('email_div').style.color = "red";
     email_error.textContent = "Email is required";
     email.focus();
-    return false;
+    count_error++;
+  } else {
+    email.style.border = "1px solid black";
+    document.getElementById('email_div').style.color = "black";
+    email_error.textContent = "";
   }
   // validate password
   if (password.value == "") {
@@ -46,7 +59,12 @@ function Validate() {
     password_confirm.style.border = "1px solid red";
     password_error.textContent = "Password is required";
     password.focus();
-    return false;
+    count_error++;
+  }else {
+    password.style.border = "1px solid black";
+    document.getElementById('password_div').style.color = "black";
+    password_confirm.style.border = "1px solid black";
+    password_error.textContent = "";
   }
   // check if the two passwords match
   if (password.value != password_confirm.value) {
@@ -54,15 +72,23 @@ function Validate() {
     document.getElementById('pass_confirm_div').style.color = "red";
     password_confirm.style.border = "1px solid red";
     password_error.innerHTML = "The two passwords do not match";
-    return false;
+    count_error++;
+  }else{
+    password.style.border = "1px solid black";
+    document.getElementById('pass_confirm_div').style.color = "black";
+    password_confirm.style.border = "1px solid black";
+    password_error.innerHTML = "";
   }
+
+  if (count_error==0) return true;
+  else return false;
 }
 
 
 // event handler functions
 function nameVerify() {
   if (username.value != "") {
-    username.style.border = "1px solid #5e6e66";
+    username.style.border = "1px solid #3b599";
     document.getElementById('username_div').style.color = "#5e6e66";
     name_error.innerHTML = "";
     return true;
@@ -90,4 +116,5 @@ function passwordVerify() {
     password_error.innerHTML = "";
     return true;
   }
+
 }
