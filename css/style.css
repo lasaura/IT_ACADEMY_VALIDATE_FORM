@@ -28,3 +28,16 @@ form {
   border-radius: 5px;
   padding: 12px;
 }
+
+.inputError {
+
+  border: 1px solid red;
+
+}
+
+.inputNoError{
+
+  border: 1px solid black
+  
+}
+
